@@ -1,0 +1,197 @@
+/* src/styles/global.css */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Reset & base ──────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { background: #0a0a0a; color: rgba(255,255,255,0.82); overflow-x: hidden; }
+
+/* Scrollbar */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: #0a0a0a; }
+::-webkit-scrollbar-thumb  { background: #00d4ff44; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #00d4ff88; }
+
+/* ── CSS variables ─────────────────────────────── */
+:root {
+  --cyan:    #00d4ff;
+  --emerald: #00ff88;
+  --base:    #0a0a0a;
+  --panel:   #16161a;
+  --border:  rgba(255,255,255,0.06);
+  --text:    rgba(255,255,255,0.82);
+  --muted:   rgba(255,255,255,0.4);
+}
+
+/* ── Glassmorphism card ────────────────────────── */
+@layer components {
+  .glass {
+    background:       rgba(255,255,255,0.04);
+    backdrop-filter:  blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border:           1px solid rgba(255,255,255,0.07);
+    border-radius:    16px;
+  }
+  .glass-hover {
+    transition: all 0.3s cubic-bezier(.16,1,.3,1);
+  }
+  .glass-hover:hover {
+    background:  rgba(255,255,255,0.07);
+    border-color: rgba(0,212,255,0.25);
+    box-shadow:  0 0 40px rgba(0,212,255,0.1), 0 8px 40px rgba(0,0,0,0.4);
+    transform:   translateY(-3px);
+  }
+
+  /* Gradient text */
+  .text-gradient-cyan {
+    background: linear-gradient(135deg, #00d4ff 0%, #0088ff 50%, #00ff88 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-warm {
+    background: linear-gradient(135deg, #ffffff 0%, #00d4ff 60%, #00ff88 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glowing border button */
+  .btn-primary {
+    display:         inline-flex;
+    align-items:     center;
+    gap:             8px;
+    padding:         12px 28px;
+    background:      linear-gradient(135deg, #00d4ff22, #00ff8811);
+    border:          1px solid #00d4ff55;
+    border-radius:   10px;
+    color:           #00d4ff;
+    font-family:     'Plus Jakarta Sans', sans-serif;
+    font-size:       .875rem;
+    font-weight:     600;
+    letter-spacing:  .04em;
+    text-decoration: none;
+    transition:      all .25s cubic-bezier(.16,1,.3,1);
+    cursor:          pointer;
+    white-space:     nowrap;
+  }
+  .btn-primary:hover {
+    background:  linear-gradient(135deg, #00d4ff33, #00ff8822);
+    border-color: #00d4ffaa;
+    box-shadow:  0 0 30px rgba(0,212,255,0.3);
+    transform:   translateY(-2px);
+  }
+
+  .btn-secondary {
+    display:         inline-flex;
+    align-items:     center;
+    gap:             8px;
+    padding:         12px 28px;
+    background:      transparent;
+    border:          1px solid rgba(255,255,255,0.12);
+    border-radius:   10px;
+    color:           rgba(255,255,255,0.7);
+    font-family:     'Plus Jakarta Sans', sans-serif;
+    font-size:       .875rem;
+    font-weight:     500;
+    letter-spacing:  .04em;
+    text-decoration: none;
+    transition:      all .25s cubic-bezier(.16,1,.3,1);
+    cursor:          pointer;
+    white-space:     nowrap;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.3);
+    color:        rgba(255,255,255,0.95);
+    transform:    translateY(-2px);
+  }
+
+  /* Tag / badge */
+  .tag {
+    display:         inline-flex;
+    align-items:     center;
+    gap:             6px;
+    padding:         4px 12px;
+    background:      rgba(0,212,255,0.08);
+    border:          1px solid rgba(0,212,255,0.2);
+    border-radius:   100px;
+    color:           #00d4ff;
+    font-family:     'JetBrains Mono', monospace;
+    font-size:       .7rem;
+    letter-spacing:  .1em;
+  }
+
+  /* Section label */
+  .section-label {
+    font-family:     'JetBrains Mono', monospace;
+    font-size:       .7rem;
+    letter-spacing:  .2em;
+    color:           #00d4ff;
+    text-transform:  uppercase;
+  }
+
+  /* Animated reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+  .reveal-delay-4 { transition-delay: .4s; }
+  .reveal-delay-5 { transition-delay: .5s; }
+}
+
+/* ── Background mesh gradient ──────────────────── */
+.mesh-bg {
+  background:
+    radial-gradient(ellipse 800px 600px at 10% 20%, rgba(0,212,255,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 500px at 90% 70%, rgba(0,255,136,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 400px at 50% 50%, rgba(0,136,255,0.03) 0%, transparent 70%),
+    #0a0a0a;
+}
+
+/* ── Grid dot pattern ──────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── Gradient divider line ─────────────────────── */
+.line-gradient {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), rgba(0,255,136,0.3), transparent);
+}
+
+/* ── Inline code style ─────────────────────────── */
+code {
+  font-family:  'JetBrains Mono', monospace;
+  font-size:    .8em;
+  background:   rgba(0,212,255,0.08);
+  color:        #00d4ff;
+  padding:      2px 6px;
+  border-radius: 4px;
+  border:       1px solid rgba(0,212,255,0.15);
+}
+
+/* ── Stagger animation helper ──────────────────── */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+[data-stagger].visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:.05s; }
+[data-stagger].visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:.12s; }
+[data-stagger].visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:.19s; }
+[data-stagger].visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:.26s; }
+[data-stagger].visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:.33s; }
+[data-stagger].visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay:.40s; }

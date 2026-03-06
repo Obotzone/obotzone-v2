@@ -1,0 +1,101 @@
+---
+// src/components/Footer.astro
+const year = new Date().getFullYear();
+
+const links = {
+  'Layanan': ['Web Development','UI/UX Design','E-Commerce','Cloud & DevOps','Brand Identity'],
+  'Company': ['Tentang Kami','Portfolio','Blog','Karir','Press Kit'],
+  'Resources': ['Dokumentasi','Case Studies','FAQ','Status Page'],
+};
+---
+
+<footer class="relative border-t border-white/06 overflow-hidden">
+
+  <!-- Top gradient line -->
+  <div class="line-gradient opacity-60"></div>
+
+  <!-- Ambient -->
+  <div class="pointer-events-none absolute bottom-0 left-0 w-96 h-64 opacity-[0.04] rounded-full"
+       style="background:radial-gradient(circle, #00d4ff, transparent);"></div>
+
+  <div class="max-w-6xl mx-auto px-6 pt-16 pb-10">
+
+    <!-- Main footer grid -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
+
+      <!-- Brand col -->
+      <div class="col-span-2">
+        <!-- Logo -->
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-9 h-9">
+            <svg viewBox="0 0 32 32" fill="none" class="w-full h-full">
+              <path d="M16 2 L28 9 L28 23 L16 30 L4 23 L4 9 Z"
+                    stroke="#00d4ff" stroke-width="1.5" fill="rgba(0,212,255,0.08)"/>
+              <path d="M16 8 L22 11.5 L22 18.5 L16 22 L10 18.5 L10 11.5 Z" fill="#00d4ff" opacity="0.6"/>
+            </svg>
+          </div>
+          <span class="font-display font-bold text-xl text-white tracking-tight">
+            Obot<span class="text-gradient-cyan">zone</span>
+          </span>
+        </div>
+        <p class="text-white/35 text-sm leading-relaxed font-light max-w-xs mb-6">
+          Studio teknologi digital yang membangun produk web modern, cepat, dan elegan untuk bisnis Indonesia.
+        </p>
+        <!-- Social -->
+        <div class="flex items-center gap-3">
+          {[
+            { label:'GitHub', href:'https://github.com/Obotzone',
+              icon:`<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>` },
+            { label:'Instagram', href:'https://instagram.com/obotzone',
+              icon:`<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>` },
+            { label:'LinkedIn', href:'#',
+              icon:`<path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>` },
+          ].map(s => (
+            <a href={s.href}
+               aria-label={s.label}
+               class="w-9 h-9 rounded-lg border border-white/08 flex items-center justify-center
+                      text-white/30 hover:text-cyan hover:border-cyan/30
+                      transition-all duration-200"
+               target="_blank" rel="noopener">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <Fragment set:html={s.icon} />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Link columns -->
+      {Object.entries(links).map(([col, items]) => (
+        <div>
+          <h5 class="font-mono text-[0.65rem] tracking-widest text-white/30 uppercase mb-4">{col}</h5>
+          <ul class="space-y-2.5">
+            {items.map(item => (
+              <li>
+                <a href="#" class="text-white/45 text-sm font-light hover:text-cyan transition-colors duration-150">
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="line-gradient mb-6 opacity-30"></div>
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="font-mono text-[0.62rem] text-white/20 tracking-wider">
+        © {year} Obotzone.id — All rights reserved
+      </p>
+      <div class="flex items-center gap-6">
+        <a href="#" class="font-mono text-[0.62rem] text-white/20 hover:text-white/50 transition-colors tracking-wider">Privacy</a>
+        <a href="#" class="font-mono text-[0.62rem] text-white/20 hover:text-white/50 transition-colors tracking-wider">Terms</a>
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald animate-pulse inline-block"></span>
+          <span class="font-mono text-[0.62rem] text-emerald/60 tracking-wider">All Systems Operational</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

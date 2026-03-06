@@ -1,0 +1,192 @@
+---
+// src/components/Services.astro
+
+const services = [
+  {
+    id: '01',
+    title: 'Web Development',
+    desc:  'Website dan web app modern dibangun dengan Astro, Next.js, atau framework terbaik sesuai kebutuhan. Performa tinggi, SEO ready, dan deploy otomatis ke edge.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7">
+             <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+           </svg>`,
+    color: '#00d4ff',
+    tags: ['Astro', 'Next.js', 'TypeScript'],
+    size: 'large', // spans 2 cols
+  },
+  {
+    id: '02',
+    title: 'UI/UX Design',
+    desc:  'Desain antarmuka yang intuitif, elegan, dan berorientasi konversi. Dari wireframe ke prototype interaktif.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7">
+             <circle cx="12" cy="12" r="10"/>
+             <circle cx="12" cy="12" r="4"/>
+             <line x1="12" y1="2" x2="12" y2="6"/>
+             <line x1="12" y1="18" x2="12" y2="22"/>
+           </svg>`,
+    color: '#00ff88',
+    tags: ['Figma', 'Prototyping'],
+    size: 'small',
+  },
+  {
+    id: '03',
+    title: 'Cloud & DevOps',
+    desc:  'Setup CI/CD, Cloudflare Pages/Workers, Docker, dan monitoring. Infrastruktur yang scalable tanpa downtime.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7">
+             <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/>
+           </svg>`,
+    color: '#00d4ff',
+    tags: ['Cloudflare', 'Docker', 'GitHub Actions'],
+    size: 'small',
+  },
+  {
+    id: '04',
+    title: 'Brand & Identity',
+    desc:  'Identitas merek digital yang kuat: logo, sistem warna, tipografi, dan panduan brand untuk konsistensi di semua kanal.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7">
+             <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+             <path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+           </svg>`,
+    color: '#00ff88',
+    tags: ['Branding', 'Logo Design'],
+    size: 'small',
+  },
+  {
+    id: '05',
+    title: 'E-Commerce & SaaS',
+    desc:  'Platform e-commerce custom dan aplikasi SaaS dengan payment gateway, dashboard analitik, dan manajemen konten yang powerful.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7">
+             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+             <line x1="3" y1="6" x2="21" y2="6"/>
+             <path d="M16 10a4 4 0 01-8 0"/>
+           </svg>`,
+    color: '#00d4ff',
+    tags: ['Stripe', 'Supabase', 'CMS'],
+    size: 'large',
+  },
+];
+---
+
+<section id="layanan" class="py-32 px-6 relative overflow-hidden">
+
+  <!-- Ambient glow -->
+  <div class="pointer-events-none absolute top-0 right-0 w-96 h-96 opacity-[0.06] rounded-full"
+       style="background:radial-gradient(circle, #00ff88, transparent);"></div>
+
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Section header -->
+    <div class="reveal mb-16">
+      <p class="section-label mb-4">// 02 — LAYANAN</p>
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <h2 class="font-display font-bold text-white"
+            style="font-size:clamp(2.2rem, 5vw, 3.5rem); line-height:1.1; max-width:500px;">
+          Apa yang<br/>
+          <span class="text-gradient-cyan">Kami Kerjakan</span>
+        </h2>
+        <p class="text-white/45 font-light max-w-xs leading-relaxed text-sm">
+          End-to-end digital solutions — dari desain hingga deployment dan maintenance.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── BENTO GRID ─────────────────────────────── -->
+    <div class="bento-grid reveal reveal-delay-1">
+
+      {services.map((s, i) => (
+        <div
+          class={`bento-card glass glass-hover group relative overflow-hidden
+                  ${s.size === 'large' ? 'bento-large' : 'bento-small'}`}
+          style={`--accent: ${s.color};`}
+        >
+          <!-- Top accent line -->
+          <div class="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style={`background: linear-gradient(90deg, transparent, ${s.color}, transparent);`}></div>
+
+          <!-- Corner ID -->
+          <span class="absolute top-5 right-5 font-mono text-[0.6rem] opacity-20 group-hover:opacity-40 transition-opacity"
+                style={`color: ${s.color};`}>{s.id}</span>
+
+          <!-- Icon -->
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
+               style={`background: ${s.color}12; color: ${s.color}; border: 1px solid ${s.color}25;`}>
+            <Fragment set:html={s.icon} />
+          </div>
+
+          <!-- Content -->
+          <h3 class="font-display font-semibold text-white text-xl mb-3 tracking-tight">
+            {s.title}
+          </h3>
+          <p class="text-white/45 text-sm leading-relaxed font-light mb-5">
+            {s.desc}
+          </p>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2 mt-auto">
+            {s.tags.map(t => (
+              <span class="font-mono text-[0.62rem] px-2.5 py-1 rounded-full border tracking-wider"
+                    style={`color:${s.color}; background:${s.color}0d; border-color:${s.color}22;`}>
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <!-- Arrow link -->
+          <div class="absolute bottom-5 right-5 w-8 h-8 rounded-lg flex items-center justify-center
+                      opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0"
+               style={`background:${s.color}15; color:${s.color};`}>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </div>
+        </div>
+      ))}
+
+      <!-- CTA card -->
+      <div class="bento-cta glass group relative overflow-hidden flex flex-col items-center justify-center text-center p-8"
+           style="background: linear-gradient(135deg, rgba(0,212,255,0.07), rgba(0,255,136,0.04));">
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+             style="background:linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,255,136,0.06));"></div>
+        <p class="font-mono text-[0.65rem] text-cyan/50 tracking-widest mb-4">// CUSTOM PROJECT</p>
+        <h3 class="font-display font-bold text-white text-xl mb-3">Ada Kebutuhan Khusus?</h3>
+        <p class="text-white/40 text-sm mb-6 font-light">Kami terbuka untuk semua jenis proyek digital.</p>
+        <a href="#kontak" class="btn-primary relative z-10">Diskusi Sekarang</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+  .bento-card {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .bento-large { grid-column: span 2; }
+  .bento-small { grid-column: span 1; }
+  .bento-cta   { grid-column: span 1; min-height: 220px; }
+
+  /* Row assignment */
+  .bento-grid > *:nth-child(1) { grid-column: span 2; } /* Web Dev — large */
+  .bento-grid > *:nth-child(2) { grid-column: span 1; } /* UI/UX */
+  .bento-grid > *:nth-child(3) { grid-column: span 1; } /* Cloud */
+  .bento-grid > *:nth-child(4) { grid-column: span 1; } /* Brand */
+  .bento-grid > *:nth-child(5) { grid-column: span 2; } /* E-Commerce — large */
+  .bento-grid > *:nth-child(6) { grid-column: span 1; } /* CTA */
+
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-grid > * { grid-column: span 1 !important; }
+  }
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .bento-grid { grid-template-columns: repeat(2, 1fr); }
+    .bento-grid > *:nth-child(1),
+    .bento-grid > *:nth-child(5) { grid-column: span 2; }
+    .bento-grid > *:nth-child(6) { grid-column: span 2; }
+  }
+</style>

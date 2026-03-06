@@ -1,0 +1,186 @@
+---
+// src/components/Contact.astro
+---
+
+<section id="kontak" class="py-32 px-6 relative overflow-hidden">
+  <div class="absolute top-0 left-0 right-0 line-gradient opacity-40"></div>
+
+  <!-- Ambient -->
+  <div class="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] opacity-[0.07] rounded-full"
+       style="background:radial-gradient(ellipse, #00d4ff, transparent);"></div>
+
+  <div class="max-w-3xl mx-auto relative z-10">
+
+    <!-- Header -->
+    <div class="reveal text-center mb-16">
+      <p class="section-label mb-4">// 06 — KONTAK</p>
+      <h2 class="font-display font-bold text-white mb-5"
+          style="font-size:clamp(2.2rem,5vw,3.8rem); line-height:1.1;">
+        Siap Mulai<br/>
+        <span class="text-gradient-cyan">Proyek Bersama?</span>
+      </h2>
+      <p class="text-white/45 font-light max-w-md mx-auto leading-relaxed">
+        Ceritakan kebutuhan digital kamu. Kami akan respons dalam 24 jam.
+      </p>
+    </div>
+
+    <!-- Form -->
+    <div class="reveal reveal-delay-1 glass p-8 md:p-10" style="border-radius:20px;">
+      <!-- Scan bar -->
+      <div class="relative h-px bg-white/5 mb-8 overflow-hidden rounded">
+        <div class="absolute top-0 left-0 h-full w-1/4 bg-gradient-to-r from-transparent via-cyan to-transparent"
+             style="animation: formScan 3s ease-in-out infinite;"></div>
+      </div>
+
+      <form id="contactForm" class="space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div class="form-group">
+            <label class="form-label">Nama</label>
+            <input type="text" name="name" placeholder="Nama lengkap kamu"
+                   class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" placeholder="email@domain.com"
+                   class="form-input" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Jenis Kebutuhan</label>
+          <select name="service" class="form-input form-select">
+            <option value="">Pilih layanan...</option>
+            <option value="web-dev">Web Development</option>
+            <option value="ui-ux">UI/UX Design</option>
+            <option value="ecommerce">E-Commerce</option>
+            <option value="brand">Brand Identity</option>
+            <option value="cloud">Cloud & DevOps</option>
+            <option value="other">Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Budget Range</label>
+          <select name="budget" class="form-input form-select">
+            <option value="">Estimasi budget...</option>
+            <option value="3-5">Rp 3 – 5 juta</option>
+            <option value="5-10">Rp 5 – 10 juta</option>
+            <option value="10-20">Rp 10 – 20 juta</option>
+            <option value="20+">Di atas Rp 20 juta</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ceritakan Proyekmu</label>
+          <textarea name="message" rows="5"
+                    placeholder="Deskripsikan kebutuhan, tujuan, dan timeline yang kamu inginkan..."
+                    class="form-input resize-none" required></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-primary w-full justify-center py-4 text-base">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          <span id="btnText">Kirim Pesan</span>
+        </button>
+      </form>
+
+      <!-- Success state (hidden) -->
+      <div id="successMsg" class="hidden text-center py-8">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
+             style="background:rgba(0,255,136,0.12); border:1px solid rgba(0,255,136,0.3);">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-semibold text-white text-xl mb-2">Pesan Terkirim!</h3>
+        <p class="text-white/45 text-sm font-light">Kami akan menghubungi kamu dalam 24 jam.</p>
+      </div>
+    </div>
+
+    <!-- Alternatives -->
+    <div class="reveal reveal-delay-2 flex flex-wrap items-center justify-center gap-6 mt-10">
+      <a href="mailto:hello@obotzone.id"
+         class="flex items-center gap-2.5 text-sm text-white/40 hover:text-cyan transition-colors duration-200">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        hello@obotzone.id
+      </a>
+      <span class="text-white/10">|</span>
+      <a href="https://wa.me/6281234567890"
+         class="flex items-center gap-2.5 text-sm text-white/40 hover:text-emerald transition-colors duration-200">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 0118 1.18a2 2 0 012 2v3"/>
+        </svg>
+        WhatsApp
+      </a>
+      <span class="text-white/10">|</span>
+      <a href="https://instagram.com/obotzone"
+         class="flex items-center gap-2.5 text-sm text-white/40 hover:text-white transition-colors duration-200">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        @obotzone
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  const success = document.getElementById('successMsg');
+  const btnText = document.getElementById('btnText');
+  const btn = document.getElementById('submitBtn') as HTMLButtonElement;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    if (btnText) btnText.textContent = 'Mengirim...';
+    setTimeout(() => {
+      form.classList.add('hidden');
+      success?.classList.remove('hidden');
+    }, 1200);
+  });
+</script>
+
+<style>
+  .form-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .15em;
+    color: rgba(0,212,255,0.6);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .form-input {
+    width: 100%;
+    padding: 13px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    color: rgba(255,255,255,0.85);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: .875rem;
+    transition: all .2s ease;
+    outline: none;
+  }
+  .form-input:focus {
+    border-color: rgba(0,212,255,0.4);
+    background: rgba(0,212,255,0.04);
+    box-shadow: 0 0 0 3px rgba(0,212,255,0.08);
+  }
+  .form-input::placeholder { color: rgba(255,255,255,0.2); }
+  .form-select { cursor: pointer; }
+  .form-select option { background: #16161a; color: white; }
+
+  @keyframes formScan {
+    0%,100% { transform: translateX(-200%); }
+    50%      { transform: translateX(600%); }
+  }
+</style>

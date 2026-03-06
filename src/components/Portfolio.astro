@@ -1,0 +1,158 @@
+---
+// src/components/Portfolio.astro
+
+const projects = [
+  {
+    id: 'PRJ-001',
+    title: 'Platform Analytics SaaS',
+    category: 'Web Application',
+    year: '2024',
+    desc: 'Dashboard analitik real-time untuk bisnis e-commerce dengan visualisasi data interaktif dan laporan otomatis.',
+    tech: ['Next.js', 'Supabase', 'Recharts'],
+    color: '#00d4ff',
+    featured: true,
+  },
+  {
+    id: 'PRJ-002',
+    title: 'Luxury Retail Platform',
+    category: 'E-Commerce',
+    year: '2024',
+    desc: 'Platform belanja premium dengan pengalaman checkout yang mulus dan integrasi pembayaran multi-gateway.',
+    tech: ['Astro', 'Stripe', 'Cloudflare'],
+    color: '#00ff88',
+    featured: false,
+  },
+  {
+    id: 'PRJ-003',
+    title: 'Visual Identity System',
+    category: 'Brand Design',
+    year: '2023',
+    desc: 'Sistem identitas merek komprehensif termasuk logo, panduan warna, tipografi, dan template komunikasi.',
+    tech: ['Figma', 'Motion', 'Brand Guide'],
+    color: '#00d4ff',
+    featured: false,
+  },
+  {
+    id: 'PRJ-004',
+    title: 'Corporate Website Rebuild',
+    category: 'Web Development',
+    year: '2023',
+    desc: 'Rebuild total website perusahaan manufaktur dengan Lighthouse score 99 dan waktu muat di bawah 1 detik.',
+    tech: ['Astro', 'TailwindCSS', 'Cloudflare Pages'],
+    color: '#00ff88',
+    featured: false,
+  },
+];
+---
+
+<section id="portfolio" class="py-32 px-6 relative">
+
+  <!-- Top divider -->
+  <div class="absolute top-0 left-0 right-0 line-gradient opacity-40"></div>
+
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div class="reveal flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+      <div>
+        <p class="section-label mb-4">// 03 — PORTFOLIO</p>
+        <h2 class="font-display font-bold text-white"
+            style="font-size:clamp(2.2rem,5vw,3.5rem); line-height:1.1;">
+          Karya yang<br/>
+          <span class="text-gradient-cyan">Berbicara Sendiri</span>
+        </h2>
+      </div>
+      <a href="#kontak" class="btn-secondary self-start md:self-auto">
+        Semua Proyek
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Project list -->
+    <div class="space-y-3">
+      {projects.map((p, i) => (
+        <div
+          class={`reveal reveal-delay-${Math.min(i+1, 5)} glass glass-hover group
+                  flex flex-col sm:flex-row sm:items-center justify-between
+                  gap-4 px-6 py-5 cursor-pointer`}
+          style="border-radius:14px;"
+        >
+          <!-- Left: info -->
+          <div class="flex items-start sm:items-center gap-5">
+            <!-- ID -->
+            <span class="font-mono text-[0.6rem] tracking-widest opacity-30 group-hover:opacity-60
+                         transition-opacity pt-0.5 min-w-[60px]"
+                  style={`color:${p.color}`}>
+              {p.id}
+            </span>
+            <div>
+              <div class="flex items-center gap-3 mb-1.5 flex-wrap">
+                <span class="font-mono text-[0.62rem] tracking-widest uppercase"
+                      style={`color:${p.color}; background:${p.color}10; padding:2px 10px; border-radius:100px; border:1px solid ${p.color}25;`}>
+                  {p.category}
+                </span>
+                <span class="font-mono text-[0.6rem] text-white/25">{p.year}</span>
+                {p.featured && (
+                  <span class="font-mono text-[0.6rem] tracking-widest px-2.5 py-0.5 rounded-full"
+                        style="background:rgba(0,212,255,0.12); color:#00d4ff; border:1px solid rgba(0,212,255,0.25);">
+                    ★ Featured
+                  </span>
+                )}
+              </div>
+              <h3 class="font-display font-semibold text-white text-lg tracking-tight
+                         group-hover:text-gradient-cyan transition-all duration-300">
+                {p.title}
+              </h3>
+              <p class="text-white/40 text-sm font-light mt-1 max-w-md leading-relaxed hidden md:block">
+                {p.desc}
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: tech + arrow -->
+          <div class="flex items-center gap-4 sm:flex-shrink-0">
+            <div class="hidden lg:flex gap-2">
+              {p.tech.map(t => (
+                <span class="font-mono text-[0.6rem] px-2.5 py-1 rounded-full text-white/35 border border-white/08">
+                  {t}
+                </span>
+              ))}
+            </div>
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center
+                        border border-white/08 text-white/30
+                        group-hover:border-cyan group-hover:text-cyan
+                        transition-all duration-300 group-hover:bg-cyan/10 flex-shrink-0"
+                 style="color:inherit;">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Testimonial strip -->
+    <div class="reveal mt-16 glass p-8 flex flex-col md:flex-row items-start md:items-center gap-6"
+         style="border-radius:16px; background:linear-gradient(135deg, rgba(0,212,255,0.04), rgba(0,255,136,0.02));">
+      <div class="flex -space-x-3">
+        {['#00d4ff','#00ff88','#0088ff'].map(c => (
+          <div class="w-10 h-10 rounded-full border-2 border-base flex items-center justify-center text-xs font-bold"
+               style={`background:${c}22; color:${c}; border-color:#0a0a0a;`}>
+            ★
+          </div>
+        ))}
+      </div>
+      <div class="flex-1">
+        <p class="text-white/70 text-sm leading-relaxed italic font-light">
+          "Obotzone benar-benar mengubah cara kami tampil di digital. Website baru kami load dalam 0.6 detik
+          dan konversi naik 40% dalam sebulan pertama."
+        </p>
+        <p class="font-mono text-[0.65rem] text-white/30 mt-2 tracking-wider">— Klien, Platform E-Commerce · 2024</p>
+      </div>
+      <div class="flex items-center gap-1">
+        {[1,2,3,4,5].map(() => <span class="text-yellow-400 text-sm">★</span>)}
+      </div>
+    </div>
+  </div>
+</section>

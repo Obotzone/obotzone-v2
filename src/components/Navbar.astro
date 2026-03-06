@@ -1,0 +1,147 @@
+---
+// src/components/Navbar.astro
+const navLinks = [
+  { label: 'Layanan',   href: '#layanan' },
+  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Tentang',   href: '#tentang' },
+  { label: 'Blog',      href: '#blog' },
+];
+---
+
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+>
+  <!-- Glass pill nav -->
+  <div class="max-w-6xl mx-auto px-6 pt-5">
+    <nav
+      class="glass flex items-center justify-between px-6 py-3.5
+             transition-all duration-300"
+      style="border-radius: 14px;"
+    >
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group" aria-label="Obotzone Home">
+        <!-- Logo mark: animated hex -->
+        <div class="relative w-8 h-8">
+          <svg viewBox="0 0 32 32" fill="none" class="w-full h-full">
+            <path
+              d="M16 2 L28 9 L28 23 L16 30 L4 23 L4 9 Z"
+              stroke="#00d4ff" stroke-width="1.5"
+              fill="rgba(0,212,255,0.08)"
+              class="transition-all duration-300 group-hover:fill-[rgba(0,212,255,0.18)]"
+            />
+            <path
+              d="M16 8 L22 11.5 L22 18.5 L16 22 L10 18.5 L10 11.5 Z"
+              fill="#00d4ff"
+              opacity="0.6"
+            />
+          </svg>
+        </div>
+        <span class="font-display font-bold text-lg tracking-tight text-white">
+          Obot<span class="text-gradient-cyan">zone</span>
+        </span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="px-4 py-2 rounded-lg text-sm font-medium text-white/60
+                   hover:text-white hover:bg-white/06
+                   transition-all duration-200 font-sans"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="flex items-center gap-3">
+        <a href="#kontak" class="btn-primary text-sm hidden sm:inline-flex">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+          Mulai Proyek
+        </a>
+        <!-- Mobile menu toggle -->
+        <button
+          id="menuToggle"
+          class="md:hidden w-9 h-9 flex items-center justify-center
+                 rounded-lg border border-white/10 text-white/60
+                 hover:text-white hover:border-white/20 transition-all"
+          aria-label="Toggle menu"
+        >
+          <svg id="iconOpen" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="4" y1="8" x2="20" y2="8"/>
+            <line x1="4" y1="16" x2="20" y2="16"/>
+          </svg>
+          <svg id="iconClose" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile menu dropdown -->
+    <div
+      id="mobileMenu"
+      class="hidden md:hidden mt-2 glass rounded-xl overflow-hidden"
+    >
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="block px-6 py-3.5 text-sm text-white/70 hover:text-white
+                 hover:bg-white/05 border-b border-white/05
+                 transition-colors duration-150 mobile-link"
+        >
+          {link.label}
+        </a>
+      ))}
+      <div class="px-6 py-4">
+        <a href="#kontak" class="btn-primary w-full justify-center">Mulai Proyek</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const toggle   = document.getElementById('menuToggle');
+  const menu     = document.getElementById('mobileMenu');
+  const iconOpen  = document.getElementById('iconOpen');
+  const iconClose = document.getElementById('iconClose');
+
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden');
+    iconOpen?.classList.toggle('hidden', !open);
+    iconClose?.classList.toggle('hidden', open as boolean);
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+      iconOpen?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+    });
+  });
+
+  // Scroll: add blur/shadow to nav
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+  }, { passive: true });
+</script>
+
+<style>
+  #navbar.scrolled nav {
+    background: rgba(10,10,10,0.9);
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  }
+</style>
